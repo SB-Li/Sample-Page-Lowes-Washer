@@ -1,0 +1,94 @@
+body{
+    font-family: "Helvetica-Bold";
+}
+.container{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.top{
+    margin: 0;
+    padding: 20px 0;
+    border: 1px solid #cccccc;
+}
+.top ul{
+    list-style: disc;
+    list-style-position: inside;
+}
+.top button{
+    color: #fff;
+    font-size: 14px;
+    border: none;
+    width: 100%;
+    padding: 10px;
+    display: block;
+    font-size: 14px;
+    line-height: 32px;
+    text-align: center; 
+    background: #338700;
+    transition: all ease 0.2s;
+}
+.top button:hover{
+    background-color: #42af00;
+}
+
+.des{
+    font-size: 14px;
+    color: #333333;
+    font-weight: bold;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.pro-warper{
+    padding: 20px;
+    margin-top: 20px;
+    border: 1px solid #cccccc;
+}
+.img{
+    margin: 20px 0;
+    max-width: 100%;
+}
+.img.col-xs-5{
+    height: 181px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.desc{
+    font-size: 14px;
+    color: #333333;
+    margin-top: 20px;
+    font-weight: bold;
+}
+.desc p{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.price{
+    font-size: 16px;
+    overflow: hidden;
+    color: #333333;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.more{
+    width: 100%;
+    padding: 10px;
+    display: block;
+    font-size: 14px;
+    color: #0471AF;
+    line-height: 32px;
+    text-align: center;
+    background: #fff;
+    text-decoration: none;
+    border: 1px solid #cccccc;
+}
+.more:hover{
+    text-decoration: none;
+}

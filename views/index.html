@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="static/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="static/css/bootstrap/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="static/css/index.css">
+	<script src="/static/js/jquery.2.1.4.min.js"></script>
+    <script src="/static/js/data.js"></script>
+    <script>
+        $(function(){
+            var Products = {{proListStr|safe}};
+            var choseImgUrl = function(){
+                var width = document.body.clientWidth;
+                var imgs = document.querySelectorAll('img');
+                var imgSrc = function(type){
+                    imgs.forEach(item=>{
+                        if(item.getAttribute(type)){
+                            item.src = item.getAttribute(type)
+                        }
+                    });
+                }
+
+                if(width<=768){
+                    imgSrc('data-sm');
+                }else if(width<=992) {
+                    imgSrc('data-md');
+                }else if(width<=1200){
+                    imgSrc('data-lg');
+                }else{
+                    imgSrc('data-xl');
+                }
+            }
+            choseImgUrl();
+            // reload image when resizing
+            window.onresize = function(){
+                choseImgUrl();
+            }
+
+            // hover and show star product
+            var starProduct = null;
+            var products = $('.pro-warper');
+            products.each(function(index, item){
+                $(item).hover(function(){
+                    starProduct = Products[index];
+                    renderFun(starProduct);
+                }, function(){
+                    return false;
+                })
+            })
+
+            // render head part
+            function renderFun(starProduct){
+                var head = $('#head');
+                head.find('img').attr('src', (starProduct.imageUrls.xl || starPro.imageUrls.lg || starPro.imageUrls.md));
+                head.find('.name').text(starProduct.description);
+                head.find('ul').empty();
+                for(var i=0;i<3;i++){
+                    var li = $('<li class="des">' + starProduct.marketingBullets[i] + '</li>');
+                    head.find('ul').append(li);
+                }
+                head.find('.jiage').text('$' + starProduct.networkPrice);
+            }
+        })
+    </script>
+</head>
+<body>
+	<header>
+		<!--  -->
+	</header>
+	<div class="container">
+		<div class="row top" id="head">
+            <div class="col-md-3 col-sm-3 col-xs-12">
+                <img class="img" data-sm="{{item.imageUrls.sm}}" data-md="{{starPro.imageUrls.md}}" data-lg="{{starPro.imageUrls.lg}}" data-xl="{{starPro.imageUrls.xl}}" src="">
+            </div>
+            <div class="recommand col-md-6 col-sm-6 col-xs-12">
+                <h1 class="name">{{starPro.description}}</h1>
+                <ul>
+                    {% for item in starPro.marketingBullets %}
+                        {% if loop.index <=3 %}
+                            <li class="des">{{item}}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="img col-md-3 col-sm-3 col-xs-12">
+                <h1 class="jiage">${{starPro.networkPrice}}</h1>
+                <button onclick="alert('${{starPro.networkPrice}}')">ADD TO CART</button>
+            </div>
+		</div>
+		<div class="row">
+            {% for item in proList %}
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    <div class="pro-warper">
+                        <div class="row">
+                            <div class="img col-md-12 col-sm-12  col-xs-5">
+                                <img class="img" data-sm="{{item.imageUrls.sm}}" data-md="{{item.imageUrls.md}}" data-lg="{{item.imageUrls.lg}}" data-xl="{{item.imageUrls.xl}}" src="">
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-7">
+                                <div class="desc">
+                                    {% for it in item.marketingBullets %}
+                                        {% if loop.index <=3 %}
+                                            <P>{{it}}</P>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                                <p class="price">${{item.networkPrice}}</p>
+                                <a class="more" href="">VIEW MORE</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+		</div>
+	</div>
+	<footer>
+		<!--  -->
+	</footer>
+</body>
+</html>
